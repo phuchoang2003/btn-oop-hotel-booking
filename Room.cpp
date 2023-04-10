@@ -9,6 +9,7 @@ private:
 	string status; //  phong trong, phong duoc dat
 	
 public:
+	// Ham khoi tao phong
 	Room()
 	{
 		room_no = NULL;

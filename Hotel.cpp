@@ -240,6 +240,7 @@ public:
 			}
 		}
 
+		// Day la ham delete thong tin khach hang qua so phong
 		void delete_record(int roomNum) {
 			bool flag = check(roomNum);
 			if (flag) {
