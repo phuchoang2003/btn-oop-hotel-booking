@@ -1,0 +1,10 @@
+                 101            standard                 200           available
+                 102            standard                 200           available
+                 103            standard                 200           available
+                 104            standard                 200           unavailable
+                 105            standard                 200           available
+                 106            standard                 200           available
+                 107            standard                 200           available
+                 108                 VIP                1000           available
+                 109                 VIP                1000           available
+                 110                 VIP                1000           available
