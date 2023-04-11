@@ -44,10 +44,9 @@ public:
 
 	void set_price(double price) {
 		this->price = price;
-
 	}
 
 	double get_price() {
-		return price;
+		return this->price;
 	}
 };

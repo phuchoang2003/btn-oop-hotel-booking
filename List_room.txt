@@ -1,6 +1,6 @@
-                 101            standard                 200           available
-                 102            standard                 200           available
-                 103            standard                 200           available
+                 101            standard                 200           unavailable
+                 102            standard                 200           unavailable
+                 103            standard                 200           unavailable
                  104            standard                 200           unavailable
                  105            standard                 200           available
                  106            standard                 200           available

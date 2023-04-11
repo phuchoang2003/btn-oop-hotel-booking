@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include"Room.cpp"
-#include"Form.cpp"
+#include"Invoice.cpp"
 #include"Customer.cpp"
 #include<iostream>
 #include<string>
@@ -13,20 +13,17 @@ using namespace std;
 
 class Hotel {
 private:
-	string hotel_name;// Team 5 Hotel
-	string address_hotel;//79 ho tung mau mai dich cau giay ha noi
-	Form form;
-	Room room;
 	Customer customer;
 	Room* rooms = new Room[10];
-
+	Invoice bill;
 
 public:
 
 
 	Hotel() {}
 
-	void reset_rooms() { //ham nay chi dung 1 lan duy nhat de khoi tao du lieu cho cac phong va ghi du lieu vao file, nhung lan sau dung se reset lai du lieu cua cac phong
+	void reset_rooms() { //ham nay chi dung 1 lan duy nhat de khoi tao du lieu cho cac phong va ghi du lieu vao file,
+		//nhung lan sau dung se reset lai du lieu cua cac phong va xoa tat ca du lieu ve khach dat phong
 		// khach san gom 10 phong danh so tu 101 den 110
 		//khoi tao danh sach phong standard tu 101 den 107
 		for (int i = 0; i < 7; i++) {
@@ -45,9 +42,12 @@ public:
 		}
 
 		ofstream file("List_room.txt", ios::trunc);
-
+		ofstream file2("Customer_record.txt", ios::trunc);
 		for (int i = 0; i < 10; i++) {
-			file << setw(20) << rooms[i].get_room_no() << setw(20) << rooms[i].get_type_room() << setw(20) << rooms[i].get_price() << setw(20) << rooms[i].get_status() << '\n';
+			file << setw(20) << rooms[i].get_room_no()
+				<< setw(20) << rooms[i].get_type_room()
+				<< setw(20) << rooms[i].get_price()
+				<< setw(20) << rooms[i].get_status() << '\n';
 		}
 
 		file.close();
@@ -66,7 +66,7 @@ public:
 		while (getline(file, line)) {
 			if (line.find(roomNo) != string::npos) {
 				if (line.find("unavailable")!=string::npos) {
-					flag = true;
+					flag = true;//true la phong duoc dat
 					break;
 				}
 			}
@@ -103,7 +103,14 @@ public:
 
 			system("cls");
 			cout << "\n\n\n";
-			cout << left << setw(15) <<"Room no" << setw(30) << "Name" << setw(15) << "Age" << setw(15) << "Gender" << setw(15) << "Id" << setw(15) << "Phone" << endl;
+			cout << left << setw(10) <<"Room no" 
+				<< setw(20) << "Name"
+				<< setw(10) << "Age"
+				<< setw(10) << "Gender"
+				<< setw(15) << "Id" 
+				<<setw(15) << "Phone" 
+				<< setw(20)<<"Days Check Out"
+				<<setw(5)<<"Total"<<endl;
 			string line;
 			ifstream file("Customer_record.txt", ios::in);
 			while (getline(file, line)) {
@@ -115,7 +122,7 @@ public:
 			file.close();
 		}
 		
-			//xuat ra thong tin khach thue phong
+			
 		else
 		{
 			system("cls");
@@ -127,7 +134,7 @@ public:
 		
 	}
 		
-
+	// day la ham thuc hien book phong
 		void book_room() {
 			int r;
 			cout << "\n\n\t\tCustomer Detail" << endl;
@@ -157,11 +164,21 @@ public:
 
 			{
 				customer.input();
+				bill.input();
 				rooms[r - 101].set_room_no(r);
 				rooms[r - 101].set_status("unavailable");
+				
 				string customer_record;
 				ofstream file2("Customer_record.txt", ios::app);//dien thong tin cua khach vao file 
-				file2 <<left<<setw(15)<< rooms[r - 101].get_room_no() << setw(30) << customer.get_name() << setw(15) << customer.get_age() << setw(15) << customer.get_gender() << setw(15) << customer.get_id() << setw(15) << customer.get_phone() << endl;
+				file2 <<left<<setw(10)
+					<< rooms[r - 101].get_room_no()
+					<< setw(20) << customer.get_name() 
+					<< setw(10) << customer.get_age() 
+					<< setw(10) << customer.get_gender() 
+					<< setw(15) << customer.get_id() 
+					<< setw(15) << customer.get_phone() 
+					<<setw(20)<<bill.get_days()
+					<<setw(5)<<bill.payment(r)<<endl;
 				file2.close();
 				string txtRoomNum = to_string(r);
 				string line;
@@ -198,6 +215,7 @@ public:
 
 
 		}
+		//day la ham doi thong tin khach hang
 		void modify_record(int roomNum) {
 			bool flag = check(roomNum);
 			if (flag) {
@@ -215,7 +233,15 @@ public:
 							cout << "\n\n\t\t\tEnter New Information" << endl;
 							cout << "\t\t\t*********************" << endl;
 							customer.input();
-							tempfile << left << setw(15) << txtRoomNum << setw(30) << customer.get_name() << setw(15) << customer.get_age() << setw(15) << customer.get_gender() << setw(15) << customer.get_id() << setw(15) << customer.get_phone() << endl;
+							bill.input();
+							tempfile << left << setw(10) << rooms[roomNum-101].get_room_no() 
+								<< setw(20) << customer.get_name() 
+								<< setw(10) << customer.get_age() 
+								<< setw(10) << customer.get_gender() 
+								<< setw(15) << customer.get_id() 
+								<< setw(15) << customer.get_phone() 
+								<< setw(20) << bill.get_days() 
+								<< setw(5) << bill.payment(roomNum)<< endl;
 							tempfile.flush();
 						}
 						else {
@@ -314,11 +340,10 @@ public:
 			{
 				system("cls");
 				cout << "\n\n\t\t\tRoom Does NOT Exist!" << endl;
-				cout << "\n\n\t\t\tPress Any Key To Continue.......";
 				_getch();
 			}
 		}
-
+		//Day la ham edit thong tin khach hang gom 2 tinh nang la delete va modify
 		void edit_record() 
 		{
 			cout << "\n\n\t\t\tEdit Menu" << endl;
