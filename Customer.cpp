@@ -49,8 +49,6 @@ public:
 	}
 
 	void display() {
-		
-		
 		cout << "Name: " << this->full_name << endl;
 		cout << "Age:" << this->age << endl;
 		cout << "Gender: " << this->gender<<endl;

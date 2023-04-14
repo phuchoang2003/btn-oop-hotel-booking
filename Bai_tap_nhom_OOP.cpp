@@ -7,9 +7,12 @@
 #include"Form.cpp"
 #include"Hotel.cpp"
 #include"Room.cpp"
+#include"Invoice.cpp"
 #include<fstream>
 
-    
+using namespace std;
+int Invoice::dem = 0;
+
 
 int main()
 {
