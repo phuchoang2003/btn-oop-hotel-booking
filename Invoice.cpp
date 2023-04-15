@@ -25,7 +25,6 @@ public:
 	 }
 
 	Invoice(){
-		invoice_id = "LTHDT0000"+ dem;// moi 1 don dat phong se co 1 hoa don rieng
 		total = NULL;
 		days = NULL;
 	}
@@ -33,15 +32,16 @@ public:
 
 
 	Invoice(int days) {
-		this->invoice_id = "LTHDT0000" + dem;
+		this->invoice_id = invoice_id;
 		this->days = days;
 		this->total = room.get_price() * days;
 	}
 	~Invoice(){
 	}
 
+
 	string get_invoice_id() {
-		return invoice_id ="LTHDT0000" + dem;
+		return invoice_id ="LTHDT0000";
 	}
 
 
@@ -67,7 +67,7 @@ public:
 		system("cls");
 		cout << "--------------------------------------------" << endl;
 		cout << "\t        Invoice \n\n";
-		cout << "Code Bill: " << get_invoice_id();
+		cout << "Code Bill: " << get_invoice_id() + to_string(dem);
 		room.set_room_no(room_number);
 		cout << "\tNumber Of Room: " << room.get_room_no() << endl;
 		cout << "--------------------------------------------" << endl;

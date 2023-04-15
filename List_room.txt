@@ -1,4 +1,4 @@
-                 101            standard                 200           unavailable
+                 101            standard                 200           available
                  102            standard                 200           available
                  103            standard                 200           available
                  104            standard                 200           available
