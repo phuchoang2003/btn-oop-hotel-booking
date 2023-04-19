@@ -19,7 +19,7 @@ public:
 	void set_id(string id) {
 		this->id = id;
 	}
-	void get_phone(string phone) {
+	void set_phone(string phone) {
 		this->phone = phone;
 	}
 

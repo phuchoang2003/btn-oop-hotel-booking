@@ -15,10 +15,7 @@ int Invoice::dem = 0;
 
 int main()
 {
-    
-    
-  Hotel h;
-
+Hotel h;
 h.main_menu(); 
     return 0;
 }
